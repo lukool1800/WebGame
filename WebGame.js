@@ -1,3 +1,11 @@
+
+//canvas setup
+const canvas = document.querySelector(".gameCanvas");
+const width = (canvas.width = window.innerWidth);
+const height = (canvas.height = window.innerHeight);
+
+
+//Shuffle fuction
 var cardSlots = [1,2,3,4,5,6,7,8,9,10];
 var cardTypeList = ["death", "coin", "stop", "draw", "swap", "coin", "stop", "draw", "swap", "coin"];
 var cardType = 0;
@@ -18,6 +26,9 @@ function removeItemOnce(arr, value) {
 console.log(cardSlots.slice(0, 4));
 console.log(cardSlots.slice(4, 6));
 console.log(cardSlots.slice(6, 10));
+
+
+//Graphic creation
 var grid = [1,2,3,4,11,5,6,12,7,8,9,10];
 for (let i=0; i<4; i++){
     for(let a=0; a<3; a++){
@@ -48,6 +59,8 @@ for (let i=0; i<4; i++){
         add(text);
     }
 }
+
+//Turn red
 mouseMoveMethod(turnRed);
 function turnRed(e){
     var elem = getElementAt(e.getX(), e.getY());
