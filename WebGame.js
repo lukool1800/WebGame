@@ -52,14 +52,14 @@ for (let i=0; i<4; i++){
     }
 }
 // Makes the element where the mouse is turn red (can't undo yet)
-mouseMoveMethod(turnRed);
+mouseClickMethod(turnRed);
 function turnRed(e){
     var elem = getElementAt(e.getX(), e.getY());
-    var mouseX = e.getX();
-    var mouseY = e.getY();
     if (elem != null) {
-        if (elem.constructor == Rectangle){
+        if (elem.color == "blue"){
             elem.setColor("red");
+        }else if (elem.color == "red"){
+            elem.setColor("blue");
         }
     }
 }
