@@ -49,7 +49,6 @@ testcard.setSize(100,200);
 */
 
 
-// Shuffle
 var cardSlots = [1,2,3,4,5,6,7,8,9,10];
 var cardTypeList = ["death", "coin", "stop", "draw", "swap", "coin", "stop", "draw", "swap", "coin"];
 var cardType = 0;
@@ -106,27 +105,19 @@ for (let i=0; i<4; i++){
 mouseClickMethod(click);
 var elem = 0
 function click(e){
+    //console.log("clicked");
     var elem = getElementAt(e.getX(), e.getY());
     if (elem != null) {
         if (elem.constructor == Rectangle){
             if(elem.color == "blue"){
-                turnRed();
-            }
-            if(elem.color == "red"){
-                turnBlue();
+                elem.setColor("red");
+                console.log("clicked");
+            }else if(elem.color == "red"){
+                elem.setColor("blue");
             }
         }
     }
 }
-function turnRed(e){
-    if (elem != null) {
-        if (elem.constructor == Rectangle){
-            if(elem.color == "blue"){
-                elem.setColor("red")
-            }
-            mouseClickMethod(click);
-        }
-    }
 }
 function turnBlue(e){
     if (elem != null) {
