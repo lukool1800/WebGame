@@ -104,9 +104,10 @@ for (let i=0; i<4; i++){
 // Makes the element where the mouse is turn red (can't undo yet)
 mouseClickMethod(click);
 var elem = 0
+var elemText = 0
 function click(e){
     //console.log("clicked");
-    var elem = getElementAt(e.getX(), e.getY());
+    elem = getElementAt(e.getX(), e.getY());
     if (elem != null) {
         if (elem.constructor == Rectangle){
             if(elem.color == "blue"){
@@ -116,7 +117,65 @@ function click(e){
                 elem.setColor("blue");
             }
         }
+        if (elem.constructor == Text){
+            elemText = elem.getText();
+            console.log(elemText);
+            return(elemText);
+        }
     }
+}
+function gameRun (firstClick, secondClick){
+    if (firstClick = "death"){
+        
+    }else if (firstClick = "coin"){
+        if (secondClick = "death"){
+            
+        }else if (secondClick = "coin"){
+            
+        }else if (secondClick = "stop"){
+            
+        }else if (secondClick = "swap"){
+            
+        }else if (secondClick = "draw"){
+            
+        } 
+    }else if (firstClick = "stop"){
+        if (secondClick = "death"){
+            
+        }else if (secondClick = "coin"){
+            
+        }else if (secondClick = "stop"){
+            
+        }else if (secondClick = "swap"){
+            
+        }else if (secondClick = "draw"){
+            
+        } 
+    }else if (firstClick = "swap"){
+        if (secondClick = "death"){
+            
+        }else if (secondClick = "coin"){
+            
+        }else if (secondClick = "stop"){
+            
+        }else if (secondClick = "swap"){
+            
+        }else if (secondClick = "draw"){
+            
+        } 
+    }else if (firstClick = "draw"){
+        if (secondClick = "death"){
+            
+        }else if (secondClick = "coin"){
+            
+        }else if (secondClick = "stop"){
+            
+        }else if (secondClick = "swap"){
+            
+        }else if (secondClick = "draw"){
+            
+        } 
+    } 
 }
 }
 function turnBlue(e){
