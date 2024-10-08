@@ -52,40 +52,38 @@ for (let i=0; i<4; i++){
     }
 }
 // Makes the element where the mouse is turn red (can't undo yet)
-mouseClickMethod(turnRed);
-var numberRed = 0
+mouseClickMethod(click);
 var elem = 0
-var greaterThanRed = 0
-function turnRed(e){
-    elem = getElementAt(e.getX(), e.getY());
+function click(e){
     if (elem != null) {
-        if (elem.construct == Rectangle){
-            if (elem.color == "blue"){
-                elem.setColor("red");
-                numberRed += 1;
-                greaterThanRed = checkRedNumber(numberRed);
+        if (elem.constructor == Rectangle){
+            if(elem.color == "blue"){
+                turnRed();
             }
-            if (elem.color == "red"){
-                elem.setColor("blue");
-                numberRed += 1;
-                greaterThanRed = checkRedNumber(numberRed);
-            }
-            if(greaterThanRed = true){
+            if(elem.color == "red"){
                 turnBlue();
             }
+            mouseClickMethod(click);
         }
-        
-    }
-console.log(numberRed);
-}
-function checkRedNumber(numberRed){
-    if (numberRed >= 3){
-        return(true);
     }
 }
-function turnBlue(){
-    if (greaterThanRed = true) {
-        elem.setColor("blue");
-        numberRed -= 1;
+function turnRed(e){
+    var elem = getElementAt(e.getX(), e.getY());
+    if (elem != null) {
+        if (elem.constructor == Rectangle){
+            if(elem.color == "blue"){
+                elem.setColor("red")
+            }
+            mouseClickMethod(click);
+        }
+    }
+}
+function turnBlue(e){
+    var elem = getElementAt(e.getX(), e.getY());
+    if (elem != null) {
+        if (elem.constructor == Rectangle){
+            elem.setColor("blue");
+            mouseClickMethod(turnRed);
+        }
     }
 }
