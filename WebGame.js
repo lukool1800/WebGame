@@ -53,13 +53,39 @@ for (let i=0; i<4; i++){
 }
 // Makes the element where the mouse is turn red (can't undo yet)
 mouseClickMethod(turnRed);
+var numberRed = 0
+var elem = 0
+var greaterThanRed = 0
 function turnRed(e){
-    var elem = getElementAt(e.getX(), e.getY());
+    elem = getElementAt(e.getX(), e.getY());
     if (elem != null) {
-        if (elem.color == "blue"){
-            elem.setColor("red");
-        }else if (elem.color == "red"){
-            elem.setColor("blue");
+        if (elem.construct == Rectangle){
+            if (elem.color == "blue"){
+                elem.setColor("red");
+                numberRed += 1;
+                greaterThanRed = checkRedNumber(numberRed);
+            }
+            if (elem.color == "red"){
+                elem.setColor("blue");
+                numberRed += 1;
+                greaterThanRed = checkRedNumber(numberRed);
+            }
+            if(greaterThanRed = true){
+                turnBlue();
+            }
         }
+        
+    }
+console.log(numberRed);
+}
+function checkRedNumber(numberRed){
+    if (numberRed >= 3){
+        return(true);
+    }
+}
+function turnBlue(){
+    if (greaterThanRed = true) {
+        elem.setColor("blue");
+        numberRed -= 1;
     }
 }
