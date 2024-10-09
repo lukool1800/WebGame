@@ -78,6 +78,7 @@ for (let i=0; i<4; i++){
         var box = new Rectangle(getWidth()/4 - 10, getHeight()/3 - 10);
         box.setPosition(getWidth()/4*i,getHeight()/3*a);
         box.setColor("blue");
+        box.setType(cardSlots[spotNow-1]);
         add(box);
         if(a==1){
             if(i==0){
@@ -89,7 +90,7 @@ for (let i=0; i<4; i++){
         //texts
         var cardText = new Text("temp", "30pt Arial");
         cardText.setText(cardSlots[spotNow-1]);
-        cardText.setPosition(getWidth()/4*i,getHeight()/3*a+100);
+        cardText.setPosition(getWidth()/4*i,getHeight()/3*a+80);
         add(cardText);
         if(a==1){
             if(i==0){
@@ -103,9 +104,10 @@ for (let i=0; i<4; i++){
 }
 // Makes the element where the mouse is turn red (can't undo yet)
 mouseClickMethod(click);
-var elem = 0
+var elem = 0;
+var click1 = 0;
+var click2 = 0;
 function click(e){
-    //console.log("clicked");
     var elem = getElementAt(e.getX(), e.getY());
     if (elem != null) {
         if (elem.constructor == Rectangle){
@@ -114,31 +116,46 @@ function click(e){
                 console.log("red");
             }else if(elem.color == "red"){
                 elem.setColor("blue");
-                console.log("blue")
+                console.log("blue");
             }
         }
     }
-    return(elem);
+    if (click1 == 0){
+        click1 = elem.getType();
+        console.log("click1 is " + click1);
+    }else if(click1 != 0){
+        click2 = elem.getType();
+        console.log("click2 is " + click2);
+        console.log("click1 is " + click1);
+        mainGame(click1, click2);
+    }
 }
-click1 = 0 //will be the element of the card clicked on first
-click2 = 0 //same thing as ^
-var playerWon
+var playerWon;
+var endFunction;
+var coinWin = false;
 function mainGame(click1, click2){
-    //if both clicks are the same then cancel both
+    if (click1 == click2){
+        //flip both
+        console.log("match!");
+    }
     if (click1 == "death" || click2 == "death"){
         if (click1 == "death"){
-            playerWon = "one"
-        }else{
             playerWon = "two"
+        }else if (click2 = "death"){
+            playerWon = "one"
         }
         endGame();
     }else if (click1 == "stop"){
         //flip both cards
-        mainGame();
+        click1 = 0
+        click2 = 0
+        return;
     }else if (click1 == "coin" || click2 == "coin"){
         //flip the coin card(s)
         if (click1 == "coin" && click2 == "coin"){
-            mainGame();
+            click1 = 0
+            click2 = 0
+            return;
         }
     }
     if (click1 == "swap" && click2 != "swap" || click1 != "swap" && click2 == "swap"){
@@ -148,16 +165,21 @@ function mainGame(click1, click2){
         //run the draw action for that player, if the other player didn't do swap
     }else{
         //flip both, since both are the same
-        mainGame();
+        click1 = 0
+        click2 = 0
+        return;
     }
     if (coinWin = true){
         endgame();
     }
     if(allCardsFlipped = true){
         finalRound();
-    }else{
-        mainGame();
+    }else if(endFunction <= 10){
+        endGame();
+        endfunction += 1
     }
+    click1 = 0
+    click2 = 0
 }
 function finalRound(){
     var elem = getElementsAt(getWidth()/2, getHeight()/2);
@@ -167,4 +189,5 @@ function endGame(){
     removeAll();
     var gameOver = new Text("Player " + playerWon + " wins!", "30pt Arial");
     add(gameOver);
+    gameOver.move(0, 100);
 }
