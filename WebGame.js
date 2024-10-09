@@ -111,19 +111,60 @@ function click(e){
         if (elem.constructor == Rectangle){
             if(elem.color == "blue"){
                 elem.setColor("red");
-                console.log("clicked");
+                console.log("red");
             }else if(elem.color == "red"){
                 elem.setColor("blue");
+                console.log("blue")
             }
         }
     }
+    return(elem);
 }
-}
-function turnBlue(e){
-    if (elem != null) {
-        if (elem.constructor == Rectangle){
-            elem.setColor("blue");
-            mouseClickMethod(turnRed);
+click1 = 0 //will be the element of the card clicked on first
+click2 = 0 //same thing as ^
+var playerWon
+function mainGame(click1, click2){
+    //if both clicks are the same then cancel both
+    if (click1 == "death" || click2 == "death"){
+        if (click1 == "death"){
+            playerWon = "one"
+        }else{
+            playerWon = "two"
+        }
+        endGame();
+    }else if (click1 == "stop"){
+        //flip both cards
+        mainGame();
+    }else if (click1 == "coin" || click2 == "coin"){
+        //flip the coin card(s)
+        if (click1 == "coin" && click2 == "coin"){
+            mainGame();
         }
     }
+    if (click1 == "swap" && click2 != "swap" || click1 != "swap" && click2 == "swap"){
+        //run the swap function for that player
+    }
+    if (click1 == "draw" && click2 != "draw" || click1 != "draw" && click2 == "draw"){
+        //run the draw action for that player, if the other player didn't do swap
+    }else{
+        //flip both, since both are the same
+        mainGame();
+    }
+    if (coinWin = true){
+        endgame();
+    }
+    if(allCardsFlipped = true){
+        finalRound();
+    }else{
+        mainGame();
+    }
+}
+function finalRound(){
+    var elem = getElementsAt(getWidth()/2, getHeight()/2);
+    
+}
+function endGame(){
+    removeAll();
+    var gameOver = new Text("Player " + playerWon + " wins!", "30pt Arial");
+    add(gameOver);
 }
