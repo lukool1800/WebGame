@@ -103,9 +103,10 @@ for (let i=0; i<4; i++){
 }
 // Makes the element where the mouse is turn red (can't undo yet)
 mouseClickMethod(click);
-var elem = 0
+var elem = 0;
+var click1 = 0;
+var click2 = 0;
 function click(e){
-    //console.log("clicked");
     var elem = getElementAt(e.getX(), e.getY());
     if (elem != null) {
         if (elem.constructor == Rectangle){
@@ -114,31 +115,39 @@ function click(e){
                 console.log("red");
             }else if(elem.color == "red"){
                 elem.setColor("blue");
-                console.log("blue")
+                console.log("blue");
             }
         }
     }
-    return(elem);
+    if (click1 = 0){
+        click1 = elem;
+        console.log(click1);
+    }else{
+        click2 = elem;
+        console.log(click2);
+        mainGame();
+    }
 }
-click1 = 0 //will be the element of the card clicked on first
-click2 = 0 //same thing as ^
-var playerWon
+var playerWon;
+var endFunction;
 function mainGame(click1, click2){
-    //if both clicks are the same then cancel both
+    if (click1 == click2){
+        return;
+    }
     if (click1 == "death" || click2 == "death"){
         if (click1 == "death"){
-            playerWon = "one"
-        }else{
             playerWon = "two"
+        }else if (click2 = death){
+            playerWon = "one"
         }
         endGame();
     }else if (click1 == "stop"){
         //flip both cards
-        mainGame();
+        return
     }else if (click1 == "coin" || click2 == "coin"){
         //flip the coin card(s)
         if (click1 == "coin" && click2 == "coin"){
-            mainGame();
+            return;
         }
     }
     if (click1 == "swap" && click2 != "swap" || click1 != "swap" && click2 == "swap"){
@@ -148,16 +157,19 @@ function mainGame(click1, click2){
         //run the draw action for that player, if the other player didn't do swap
     }else{
         //flip both, since both are the same
-        mainGame();
+        return;
     }
     if (coinWin = true){
         endgame();
     }
     if(allCardsFlipped = true){
         finalRound();
-    }else{
-        mainGame();
+    }else if(endFunction <= 10){
+        endGame();
+        endfunction += 1
     }
+    click1 = 0
+    click2 = 0
 }
 function finalRound(){
     var elem = getElementsAt(getWidth()/2, getHeight()/2);
